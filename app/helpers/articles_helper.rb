@@ -52,8 +52,8 @@ module ArticlesHelper
       same_source = (article.source == source)
       original_id = article.get_original.id if similar_articles?(same_source, text, article.text)
     end
+    puts "#{headline}"
     puts "SIMILAR to #{Article.find(original_id).headline}" if original_id
-    puts "#{headline}" if original_id
     Article.create(headline: headline, text: text, original_id: original_id, source: source, link: link)
   end
 

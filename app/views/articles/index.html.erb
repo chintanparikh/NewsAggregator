@@ -1,4 +1,4 @@
 <% @articles.each do |article| %>
-	<%= article.headline %>
+	<%= article.headline %> - <%= article.similar_articles.count %>
 	<br />
 <% end %>
