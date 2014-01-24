@@ -1,4 +1,3 @@
-require 'boilerpipe'
 require 'feedzirra'
 require "#{Rails.root}/app/helpers/articles_helper"
 include ArticlesHelper
