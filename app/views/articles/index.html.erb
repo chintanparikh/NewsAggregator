@@ -1,9 +1,0 @@
-<% @articles.each do |article| %>
-	<a href="<%= article.link %>"><%= article.headline %></a> - <%= article.similar_articles.count %>
-	<ul>
-	<% article.similar_articles.each do |similar| %>
-	<li><a href="<%= similar.link %>"><%= similar.headline %></a></li>
-	<% end %>
-	</ul>
-	<br />
-<% end %>
