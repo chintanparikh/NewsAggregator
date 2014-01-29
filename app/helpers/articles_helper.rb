@@ -27,6 +27,14 @@ module ArticlesHelper
         if article
           last_articles << article
           last_from_source << article
+
+          original = article.get_original
+          if original.should_be_trending? and !original.is_trending?
+            puts "TRENDING TRENDING TRENDING"
+            original.set_trending!
+            debugger
+            x=1
+          end
         end
       end
     end
@@ -52,8 +60,10 @@ module ArticlesHelper
       same_source = (article.source == source)
       original_id = article.get_original.id if similar_articles?(same_source, text, article.text)
     end
+    
     puts "#{headline}" unless original_id
     puts "#{headline} (SIMILAR to #{Article.find(original_id).headline})" if original_id
+
     Article.create(headline: headline, text: text, original_id: original_id, source: source, link: link)
   end
 
