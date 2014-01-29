@@ -9,6 +9,9 @@ gem 'sqlite3'
 gem 'feedzirra'
 gem 'embedly'
 gem 'rabl-rails'
+gem 'rabl'
+gem 'oj'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
