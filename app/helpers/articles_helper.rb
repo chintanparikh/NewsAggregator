@@ -32,8 +32,6 @@ module ArticlesHelper
           if original.should_be_trending? and !original.is_trending?
             puts "TRENDING TRENDING TRENDING"
             original.set_trending!
-            debugger
-            x=1
           end
         end
       end
