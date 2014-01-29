@@ -8,7 +8,7 @@ gem 'rails', '3.2.13'
 gem 'sqlite3'
 gem 'feedzirra'
 gem 'embedly'
-gem 'rabl'
+gem 'rabl-rails'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -26,6 +26,8 @@ group :development, :test do
 end
 
 gem 'jquery-rails'
+# Some kind of issue in multi_json
+gem 'multi_json', '1.5.1'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -40,4 +42,4 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
