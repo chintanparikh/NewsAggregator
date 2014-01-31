@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
   has_many :similar_articles, class_name: "Article", foreign_key: "original_id"
   belongs_to :original, class_name: "Article"
 
-  JACCARD = {threshold: 0.02, same_source_threshold: 0.04, n: 3}
+  JACCARD = {threshold: 0.03, same_source_threshold: 0.06, n: 3}
   TRENDING_THRESHOLD = 1
 
   scope :original, -> { where(original_id: nil) }
