@@ -23,6 +23,7 @@ class Article < ActiveRecord::Base
 
   def set_trending!
     update_attributes(trending: true, trending_time: DateTime.now.to_i)
+    Trending.create(article_id: id)
   end
 
   def get_original

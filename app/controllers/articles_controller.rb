@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
   end
 
   def trending
-    @articles = Article.trending
+    @articles = Trending.map{|trending| trending.article}
     render :index
   end
 
