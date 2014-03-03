@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140303022348) do
+ActiveRecord::Schema.define(:version => 20140303221304) do
 
   create_table "articles", :force => true do |t|
     t.string   "headline"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20140303022348) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.float    "same_source_threshold", :default => 0.1
+    t.string   "xpath"
   end
 
   create_table "trendings", :force => true do |t|

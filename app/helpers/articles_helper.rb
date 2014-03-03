@@ -1,7 +1,6 @@
-require 'embedly'
 require 'feedzirra'
-require 'pismo'
-
+require 'nokogiri'
+require 'rest-client'
 
 module ArticlesHelper
   def jaccard_index(n, article_one, article_two)
@@ -48,7 +47,7 @@ module ArticlesHelper
       return false if link == entry.link
     end
 
-    text = extract_text link
+    text = extract_text link, feed.xpath
     return false unless text
     headline = entry.send(feed.headline)
     source = feed.url
@@ -57,7 +56,7 @@ module ArticlesHelper
     # check to see if this article is similar to another
     last_articles.each do |article|
       break if original_id # if we already have a match, break
-      threshold = (article.source == source) ? Feed.find_by_url(source).same_source_threshold : Article::JACCARD[:threshold]
+      threshold = Article::JACCARD[:threshold]
       original_id = article.get_original.id if similar_articles?(threshold, text, article.text)
     end
     
@@ -67,15 +66,10 @@ module ArticlesHelper
     Article.create(headline: headline, text: text, original_id: original_id, source: source, link: link)
   end
 
-  def extract_text link 
-    # embedly = Embedly::API.new key: "23a1325f5ed547e7acb45276821e4fad"
-    # response = embedly.extract url: link
-    # text = response[0].content 
-    # # Remove all tags
-    # text = ActionView::Base.full_sanitizer.sanitize(text)
-    doc = Pismo::Document.new(link)
+  def extract_text link, xpath 
+    doc = Nokogiri::HTML(RestClient.get("http://seekingalpha.com/news/1604573-sun-hydraulics-corporation-misses-by-0_01-beats-on-revenue?source=feed"))
 
-    text = doc.body
+    text = doc.search(xpath).to_s
     text = ActionView::Base.full_sanitizer.sanitize(text)
 
     return nil unless text

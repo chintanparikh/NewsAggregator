@@ -9,7 +9,8 @@ namespace :data do
   		url: "http://rss.cnn.com/rss/money_news_companies.rss", 
   		entries: "entries",
   		link: "url",
-  		headline: "title"
+  		headline: "title",
+      xpath: "#storytext"
   		)
 
   	puts "Add http://rss.cnn.com/rss/money_news_companies.rss"
@@ -18,7 +19,8 @@ namespace :data do
   		url: "http://feeds.marketwatch.com/marketwatch/topstories?format=rss", 
   		entries: "entries",
   		link: "url",
-  		headline: "title"
+  		headline: "title",
+      xpath: "article"
   		)
 
   	puts "Add http://feeds.marketwatch.com/marketwatch/topstories?format=rss"
@@ -27,20 +29,11 @@ namespace :data do
   		url: "http://feeds.reuters.com/reuters/companyNews", 
   		entries: "entries",
   		link: "url",
-  		headline: "title"
+  		headline: "title",
+      xpath: "#articleText"
   		)
 
   	puts "Add http://feeds.reuters.com/reuters/companyNews"
-
-  	Feed.create(
-  		url: "http://online.wsj.com/xml/rss/3_7014.xml", 
-  		entries: "entries",
-  		link: "url",
-  		headline: "title",
-      same_source_threshold: 0.3
-  		)
-
-  	puts "Add http://online.wsj.com/xml/rss/3_7014.xml"
 
   end
 

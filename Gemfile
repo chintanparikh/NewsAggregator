@@ -6,11 +6,11 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'feedzirra'
-gem 'embedly'
 gem 'rabl-rails'
 gem 'rabl'
 gem 'oj'
-gem 'pismo'
+gem 'nokogiri'
+gem 'rest-client'
 
 # Gems used only for assets and not required
 # in production environments by default.
