@@ -5,7 +5,7 @@ class Article < ActiveRecord::Base
 
   belongs_to :trending
 
-  JACCARD = {threshold: 0.05, same_source_threshold: 0.1 , n: 3}
+  JACCARD = {threshold: 0.05, same_source_threshold: 0.15 , n: 3}
   TRENDING_THRESHOLD = 1
 
   scope :original, -> { where(original_id: nil) }

@@ -10,27 +10,41 @@ namespace :data do
   		entries: "entries",
   		link: "url",
   		headline: "title",
-      xpath: "#storytext"
+      xpath: "#storytext",
+      name: "CNN"
   		)
 
   	puts "Add http://rss.cnn.com/rss/money_news_companies.rss"
 
   	Feed.create(
-  		url: "http://feeds.marketwatch.com/marketwatch/topstories?format=rss", 
-  		entries: "entries",
-  		link: "url",
-  		headline: "title",
-      xpath: "article"
-  		)
+      url: "http://feeds.marketwatch.com/marketwatch/topstories?format=rss", 
+      entries: "entries",
+      link: "url",
+      headline: "title",
+      xpath: "article",
+      name: "MarketWatch"
+      )
 
-  	puts "Add http://feeds.marketwatch.com/marketwatch/topstories?format=rss"
+    puts "Add http://feeds.marketwatch.com/marketwatch/topstories?format=rss"
+
+    Feed.create(
+      url: "http://feeds.marketwatch.com/marketwatch/software/?format=rss", 
+      entries: "entries",
+      link: "url",
+      headline: "title",
+      xpath: "article",
+      name: "MarketWatch"
+      )
+
+    puts "Add http://feeds.marketwatch.com/marketwatch/software?format=rss"
 
   	Feed.create(
   		url: "http://feeds.reuters.com/reuters/companyNews", 
   		entries: "entries",
   		link: "url",
   		headline: "title",
-      xpath: "#articleText"
+      xpath: "#articleText",
+      name: "Reuters"
   		)
 
   	puts "Add http://feeds.reuters.com/reuters/companyNews"

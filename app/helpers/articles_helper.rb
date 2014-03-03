@@ -56,7 +56,7 @@ module ArticlesHelper
     # check to see if this article is similar to another
     last_articles.each do |article|
       break if original_id # if we already have a match, break
-      threshold = Article::JACCARD[:threshold]
+      threshold = (Feed.find_by_url(article.source).name == feed.name) ? Article::JACCARD[:same_source_threshold] : Article::JACCARD[:threshold]
       original_id = article.get_original.id if similar_articles?(threshold, text, article.text)
     end
     
@@ -67,7 +67,7 @@ module ArticlesHelper
   end
 
   def extract_text link, xpath 
-    doc = Nokogiri::HTML(RestClient.get("http://seekingalpha.com/news/1604573-sun-hydraulics-corporation-misses-by-0_01-beats-on-revenue?source=feed"))
+    doc = Nokogiri::HTML(RestClient.get(link))
 
     text = doc.search(xpath).to_s
     text = ActionView::Base.full_sanitizer.sanitize(text)

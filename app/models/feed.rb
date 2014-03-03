@@ -1,3 +1,3 @@
 class Feed < ActiveRecord::Base
-  attr_accessible :entries, :headline, :link, :url, :same_source_threshold
+  attr_accessible :entries, :headline, :link, :url, :same_source_threshold, :xpath, :name
 end
