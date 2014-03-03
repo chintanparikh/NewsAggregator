@@ -27,6 +27,8 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'sqlite3'
+  gem 'debugger'
+
 end
 
 group :production do
@@ -50,4 +52,3 @@ gem 'multi_json', '1.5.1'
 # gem 'capistrano'
 
 # To use debugger
-gem 'debugger'
