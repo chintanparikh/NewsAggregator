@@ -1,5 +1,7 @@
 require 'embedly'
 require 'feedzirra'
+require 'pismo'
+
 
 module ArticlesHelper
   def jaccard_index(n, article_one, article_two)
@@ -65,12 +67,17 @@ module ArticlesHelper
     Article.create(headline: headline, text: text, original_id: original_id, source: source, link: link)
   end
 
-  def extract_text link
-    embedly = Embedly::API.new key: "23a1325f5ed547e7acb45276821e4fad"
-    response = embedly.extract url: link
-    text = response[0].content 
-    # Remove all tags
+  def extract_text link 
+    # embedly = Embedly::API.new key: "23a1325f5ed547e7acb45276821e4fad"
+    # response = embedly.extract url: link
+    # text = response[0].content 
+    # # Remove all tags
+    # text = ActionView::Base.full_sanitizer.sanitize(text)
+    doc = Pismo::Document.new(link)
+
+    text = doc.body
     text = ActionView::Base.full_sanitizer.sanitize(text)
+    
     return nil unless text
     # Remove all apostrophes
     text.gsub!(/\'/, '')
