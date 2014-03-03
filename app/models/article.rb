@@ -3,6 +3,8 @@ class Article < ActiveRecord::Base
   has_many :similar_articles, class_name: "Article", foreign_key: "original_id"
   belongs_to :original, class_name: "Article"
 
+  belongs_to :trending
+
   JACCARD = {threshold: 0.05, same_source_threshold: 0.1 , n: 3}
   TRENDING_THRESHOLD = 1
 
@@ -18,11 +20,11 @@ class Article < ActiveRecord::Base
   end
 
   def is_trending?
-    trending
+    trending_id != nil
   end
 
   def set_trending!
-    update_attributes(trending: true, trending_time: DateTime.now.to_i)
+    update_attributes(trending_time: DateTime.now.to_i)
     Trending.create(article_id: id)
   end
 

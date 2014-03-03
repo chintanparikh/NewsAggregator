@@ -4,7 +4,7 @@ class Client < ActiveRecord::Base
   attr_accessible :api_key, :last_accessed
 
   def accessed!
-  	last_accessed = DateTime.now
+  	self.last_accessed = DateTime.now
   	save
   end
 

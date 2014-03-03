@@ -31,7 +31,12 @@ class ArticlesController < ApplicationController
   end
 
   def trending_new
-    Trending.where("created_at > ?", @client.last_accessed)
+    if @client.last_accessed == nil
+      @articles = Trending.all.map{|trending| trending.article}
+    else
+      @articles = Trending.where("created_at > ?", @client.last_accessed).map{|trending| trending.article}
+    end
+
     @client.accessed!
     render :index
   end

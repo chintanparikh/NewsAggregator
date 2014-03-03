@@ -11,18 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140303005506) do
+ActiveRecord::Schema.define(:version => 20140303022348) do
 
   create_table "articles", :force => true do |t|
     t.string   "headline"
     t.text     "text"
     t.integer  "original_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "source"
     t.string   "link"
-    t.boolean  "trending",      :default => false
     t.integer  "trending_time"
+    t.integer  "trending_id"
   end
 
   create_table "clients", :force => true do |t|
