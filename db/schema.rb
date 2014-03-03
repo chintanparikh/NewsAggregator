@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140302221032) do
+ActiveRecord::Schema.define(:version => 20140302223537) do
 
   create_table "articles", :force => true do |t|
     t.string   "headline"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(:version => 20140302221032) do
     t.string   "link"
     t.boolean  "trending",      :default => false
     t.integer  "trending_time"
+  end
+
+  create_table "clients", :force => true do |t|
+    t.string   "api_key"
+    t.datetime "last_accessed"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "feeds", :force => true do |t|
