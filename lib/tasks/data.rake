@@ -36,7 +36,8 @@ namespace :data do
   		url: "http://online.wsj.com/xml/rss/3_7014.xml", 
   		entries: "entries",
   		link: "url",
-  		headline: "title"
+  		headline: "title",
+      same_source_threshold: 0.3
   		)
 
   	puts "Add http://online.wsj.com/xml/rss/3_7014.xml"

@@ -10,9 +10,9 @@ module ArticlesHelper
     (first & second).length.to_f / ((first.length + second.length).to_f / 2).abs.to_f
   end
 
-  def similar_articles?(same, article_one, article_two)
+  def similar_articles?(threshold, article_one, article_two)
     index = jaccard_index(Article::JACCARD[:n], article_one, article_two) 
-    threshold = (same ? Article::JACCARD[:same_source_threshold] : Article::JACCARD[:threshold])
+    puts index if index > threshold
     index > threshold
   end
 
@@ -56,9 +56,9 @@ module ArticlesHelper
 
     # check to see if this article is similar to another
     last_articles.each do |article|
-      break if original_id
-      same_source = (article.source == source)
-      original_id = article.get_original.id if similar_articles?(same_source, text, article.text)
+      break if original_id # if we already have a match, break
+      threshold = (article.source == source) ? Feed.find_by_url(source).same_source_threshold : Article::JACCARD[:threshold]
+      original_id = article.get_original.id if similar_articles?(threshold, text, article.text)
     end
     
     puts "#{headline}" unless original_id
@@ -77,7 +77,7 @@ module ArticlesHelper
 
     text = doc.body
     text = ActionView::Base.full_sanitizer.sanitize(text)
-    
+
     return nil unless text
     # Remove all apostrophes
     text.gsub!(/\'/, '')
