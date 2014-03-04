@@ -28,7 +28,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'sqlite3'
   gem 'debugger'
-
 end
 
 group :production do
@@ -38,6 +37,7 @@ end
 gem 'jquery-rails'
 # Some kind of issue in multi_json
 gem 'multi_json', '1.5.1'
+gem 'engtagger'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

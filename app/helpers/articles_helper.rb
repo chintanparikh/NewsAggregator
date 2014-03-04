@@ -1,6 +1,7 @@
 require 'feedzirra'
 require 'nokogiri'
 require 'rest-client'
+require 'engtagger'
 
 module ArticlesHelper
   def jaccard_index(n, article_one, article_two)
@@ -58,6 +59,19 @@ module ArticlesHelper
       break if original_id # if we already have a match, break
       threshold = (Feed.find_by_url(article.source).name == feed.name) ? Article::JACCARD[:same_source_threshold] : Article::JACCARD[:threshold]
       original_id = article.get_original.id if similar_articles?(threshold, text, article.text)
+    end
+
+    tagger = EngTagger.new
+    tagged = tagger.add_tags(headline)
+    proper = tagger.get_proper_nouns(tagged)
+
+    proper.keys.each do |noun|
+      break if original_id
+      Article.where("headline like ?", noun).each do |article|
+        break if original_id
+        threshold = (Feed.find_by_url(article.source).name == feed.name) ? Article::JACCARD[:same_source_threshold] : Article::JACCARD[:threshold]
+        original_id = article.get_original.id if similar_articles?(threshold, text, article.text)
+      end
     end
     
     puts "#{headline}" unless original_id
